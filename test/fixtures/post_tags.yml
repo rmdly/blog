@@ -1,0 +1,7 @@
+published_ruby:
+  post: published_post
+  tag: ruby
+
+published_rails:
+  post: published_post
+  tag: rails

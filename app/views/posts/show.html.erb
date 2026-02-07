@@ -1,0 +1,59 @@
+<article>
+  <h1><%= @post.title %></h1>
+
+  <small>
+    <% if @post.published? %>
+      Published <%= time_ago_in_words(@post.published_at) %> ago
+    <% else %>
+      Draft
+    <% end %>
+  </small>
+
+  <% if @post.tags.any? %>
+    <div class="tags">
+      <% @post.tags.each do |tag| %>
+        <%= link_to tag.name, posts_path(tag: tag.name), class: "tag" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div><%= simple_format(@post.body) %></div>
+
+  <div>
+    <% if authenticated? %>
+      <%= link_to "Edit", edit_post_path(@post) %>
+      <%= link_to "Delete", @post, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    <% end %>
+    <%= link_to "Back to Posts", posts_path %>
+  </div>
+</article>
+
+<hr>
+
+<h2>Comments</h2>
+
+<% @post.comments.each do |comment| %>
+  <div class="comment">
+    <p><strong><%= comment.author_name %></strong></p>
+    <p><%= comment.body %></p>
+    <% if authenticated? %>
+      <%= link_to "Delete comment", post_comment_path(@post, comment), data: { turbo_method: :delete, turbo_confirm: "Delete this comment?" } %>
+    <% end %>
+  </div>
+<% end %>
+
+<h3>Add a Comment</h3>
+
+<%= form_with(model: [@post, Comment.new]) do |form| %>
+  <div>
+    <%= form.label :author_name, "Your Name" %>
+    <%= form.text_field :author_name, required: true %>
+  </div>
+  <div>
+    <%= form.label :body, "Comment" %>
+    <%= form.text_area :body, rows: 4, required: true %>
+  </div>
+  <div>
+    <%= form.submit "Post Comment" %>
+  </div>
+<% end %>

@@ -1,0 +1,28 @@
+<h1>Posts</h1>
+
+<% if authenticated? %>
+  <%= link_to "New Post", new_post_path %>
+<% end %>
+
+<% @posts.each do |post| %>
+  <article>
+    <h2><%= link_to post.title, post %></h2>
+    <p><%= truncate(post.body, length: 200) %></p>
+    <% if post.tags.any? %>
+      <div class="tags">
+        <% post.tags.each do |tag| %>
+          <%= link_to tag.name, posts_path(tag: tag.name), class: "tag" %>
+        <% end %>
+      </div>
+    <% end %>
+    <small>
+      <% if post.published? %>
+        Published <%= time_ago_in_words(post.published_at) %> ago
+      <% else %>
+        Draft
+      <% end %>
+    </small>
+  </article>
+<% end %>
+
+<%== pagy_nav(@pagy) %>

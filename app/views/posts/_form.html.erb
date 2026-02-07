@@ -1,0 +1,36 @@
+<%= form_with(model: post) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2>Could not save this post:</h2>
+      <ul>
+        <% post.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :body %>
+    <%= form.text_area :body, rows: 10 %>
+  </div>
+
+  <div>
+    <%= form.label :tag_list, "Tags (comma-separated)" %>
+    <%= form.text_field :tag_list %>
+  </div>
+
+  <div>
+    <%= form.label :published_at %>
+    <%= form.datetime_field :published_at %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

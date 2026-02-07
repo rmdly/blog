@@ -1,0 +1,20 @@
+published_post:
+  title: "Published Post"
+  body: "This is a published post body."
+  slug: "published-post"
+  published_at: <%= 1.day.ago.to_fs(:db) %>
+  user: one
+
+draft_post:
+  title: "Draft Post"
+  body: "This is a draft post body."
+  slug: "draft-post"
+  published_at:
+  user: one
+
+another_published:
+  title: "Another Published Post"
+  body: "Another published post body."
+  slug: "another-published-post"
+  published_at: <%= 2.days.ago.to_fs(:db) %>
+  user: two

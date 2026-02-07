@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Blog" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <nav>
+          <div class="nav-brand">
+            <%= link_to "Blog", root_path %>
+          </div>
+          <div class="nav-links">
+            <%= link_to "Home", root_path %>
+            <% if authenticated? %>
+              <%= link_to "New Post", new_post_path %>
+              <%= link_to "Log out", session_path, data: { turbo_method: :delete } %>
+            <% else %>
+              <%= link_to "Log in", new_session_path %>
+            <% end %>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <% if notice %>
+        <div class="flash flash-notice" id="notice"><%= notice %></div>
+      <% end %>
+      <% if alert %>
+        <div class="flash flash-alert" id="alert"><%= alert %></div>
+      <% end %>
+
+      <main>
+        <%= yield %>
+      </main>
+    </div>
+  </body>
+</html>

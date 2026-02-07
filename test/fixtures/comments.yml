@@ -1,0 +1,9 @@
+one:
+  body: "Great post!"
+  author_name: "Reader One"
+  post: published_post
+
+two:
+  body: "Thanks for sharing."
+  author_name: "Reader Two"
+  post: published_post
