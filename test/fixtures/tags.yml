@@ -1,0 +1,8 @@
+ruby:
+  name: "ruby"
+
+rails:
+  name: "rails"
+
+javascript:
+  name: "javascript"
